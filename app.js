@@ -5,39 +5,34 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
+let items = ["Hit the gym", "Meet David", "Read a book"];
+
+app.use(bodyParser.urlencoded({extended:true}));
+
 app.set('view engine', 'ejs');
 
 app.get("/", function(req, res) {
 
   // create var day for output
-  var day = "";
+  let day = new Date();
 
-  switch(new Date().getDay()) {
-    case 0:
-      day = "Sunday";
-      break;
-    case 1:
-      day = "Monday";
-      break;
-    case 2:
-      day = "Tuesday";
-      break;
-    case 3:
-      day = "Wednesday";
-      break;
-    case 4:
-      day = "Thursday";
-      break;
-    case 5:
-      day = "Friday";
-      break;
-    case 6:
-      day = "Saturday";
-  }
+  let options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
+  };
 
   // passing var from js into ejs (day -> dayOfWeek)
-  res.render("list", {dayOfWeek: day});
+  res.render("list", {dayOfWeek: day.toLocaleString("en-US", options),
+                      newListItems: items
+                      });
 
+});
+
+app.post("/", function(req, res) {
+  let item = req.body.newItem;
+  items.push(item);
+  res.redirect("/");
 });
 
 app.listen(8080, function(){
