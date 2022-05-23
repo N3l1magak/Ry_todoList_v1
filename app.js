@@ -15,7 +15,7 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/todolistDB");
+mongoose.connect("mongodb+srv://admin-reynolds:1995222@todolistcluster.2vpsn.mongodb.net/todolistDB");
 
 // create var day for output
 //

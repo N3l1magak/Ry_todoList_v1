@@ -1,5 +1,18 @@
 <%- include("header") -%>
 
+<script type='text/javascript'>
+        (() => {
+            if(window.localStorage) {
+                if (!localStorage.getItem('reload')) {
+                    localStorage['reload'] = true;
+                    window.location.reload();
+                } else {
+                    localStorage.removeItem('reload');
+                }
+            }
+        })();
+    </script>
+
     <div class="box" id="heading">
       <h1> <%= listTitle %></h1>
     </div>
